@@ -2,8 +2,6 @@ class LettersController < ApplicationController
 	def show
 		@letter = params[:id]
 
-		Rails.logger.info("Accept: #{request.headers['Accept']}")
-
 		respond_to do |format|
 			format.html
 			format.any(:json, :activity, :linked_data) { render json: Pub::Application.new(@letter).to_h }

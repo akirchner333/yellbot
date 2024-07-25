@@ -1,4 +1,5 @@
 class BoxController < ApplicationController
+	skip_before_action :verify_authenticity_token
 	def in
 		body = JSON.parse(request.raw_post)
 			
