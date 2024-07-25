@@ -3,13 +3,13 @@ module ActivityPubHelper
 		"https://#{ENV['URL']}"
 	end
 
-	def activity_post(uri, body)
+	def activity_post(uri, body, letter)
 		HTTP
-			.headers(http_signature_headers(uri, body))
+			.headers(http_signature_headers(uri, body, letter))
 			.post(uri, body: body)
 	end
 
-	def http_signature_headers(uri, body)
+	def http_signature_headers(uri, body, letter)
 		date = Time.now.utc.httpdate
 		keypair = OpenSSL::PKey::RSA.new(ENV['PRIVATE_KEY'])
 		host = uri.host
@@ -21,7 +21,7 @@ module ActivityPubHelper
 			keypair.sign(OpenSSL::Digest::SHA256.new, signed_string)
 		)
 
-		keyId = "keyId=\"#{full_url}/pub/actor/lazar#main-key\""
+		keyId = "keyId=\"#{full_url}/letters/#{letter}#main-key\""
 		headers = "headers=\"(request-target) host date digest\""
 		sig = "signature=\"#{signature}\""
 
@@ -87,7 +87,7 @@ module ActivityPubHelper
 	def build_comp_string(header_list, headers)
 		header_list.split(' ').map do |header_name|
 			if header_name == '(request-target)'
-				'(request-target): post /pub/inbox'
+				'(request-target): post /inbox'
 			else
 				"#{header_name}: #{headers[header_name.capitalize]}"
 			end

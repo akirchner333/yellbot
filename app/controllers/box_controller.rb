@@ -1,6 +1,6 @@
 class BoxController < ApplicationController
 	skip_before_action :verify_authenticity_token
-	
+
 	def in
 		body = JSON.parse(request.raw_post)
 			
@@ -9,7 +9,7 @@ class BoxController < ApplicationController
 				follow = Follow.create_from_activity(body)
 				accept = Pub::Accept.new(follow, body)
 
-				activity_post(follw.inbox, accept.to_s)
+				activity_post(follow.inbox, accept.to_s, follow.letter)
 			elsif body['type'] == "Undo"
 				if body['object']['type'] == 'Follow'
 					# Unfollow
