@@ -25,6 +25,10 @@ module Pub
 					type: "PropertyValue",
 					name: "Posts every",
 					value: "Two Hours"
+				},{
+					type: "PropertyValue",
+					name: letter,
+					value: letter
 				}
 			]
 		end
@@ -38,8 +42,9 @@ module Pub
 				**super,
 				followers: "#{full_url}/letters/#{@username}/followers",
 				following: "#{full_url}/letters/#{@username}/following",
-				inbox: "#{full_url}/letters/inbox",
-				outbox: "#{full_url}/letters/outbox",
+				# Do I need personal inboxes? Or is one big for everyone fine?
+				inbox: "#{full_url}/inbox",
+				outbox: "#{full_url}/outbox",
 				featured: "#{full_url}/letters/#{@username}/featured",
 				name: @name,
 				preferredUsername: @preferredUsername,

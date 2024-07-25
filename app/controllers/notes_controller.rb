@@ -3,7 +3,7 @@ class NotesController < ApplicationController
 		@note = Note.find(params[:id])
 		respond_to do |format|
 			format.html
-			format.all { render json: Pub::Note.from_model(@note) }
+			format.any(:json, :activity, :linked_data) { render json: Pub::Note.from_model(@note) }
 		end
 	end
 
@@ -12,7 +12,7 @@ class NotesController < ApplicationController
 
 		respond_to do |format|
 			format.html
-			format.all { render json: Pub::Note.rand(@letter) }
+			format.any(:json, :activity, :linked_data) { render json: Pub::Note.rand(@letter) }
 		end
 	end
 end
