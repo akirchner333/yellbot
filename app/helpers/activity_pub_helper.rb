@@ -31,7 +31,7 @@ module ActivityPubHelper
 
 	def sig_check(headers)
 		if !headers['Signature']
-			p "Signature failed due to lack of signature header"
+			Rails.logger.info "Signature failed due to lack of signature header"
 			return false
 		end
 
@@ -49,7 +49,7 @@ module ActivityPubHelper
 			'Accept': 'application/activity+json'
 		).get(key_id)
 		if actor_response.code != 200
-			p "Signature failed due to not getting the actor properly"
+			Rails.logger.info "Signature failed due to not getting the actor properly"
 			return false
 		end
 
@@ -59,16 +59,16 @@ module ActivityPubHelper
 		comparison_string = build_comp_string(header_list, headers)
 
 		if !key.verify(OpenSSL::Digest::SHA256.new, signature, comparison_string) 
-			p "Signature failed due to verify"
-			p "-------------- Signature ---------------------"
-			p headers['Signature']
-			p "------------- header signature ---------------"
-			p sig_header['signature']
-			p "------------- signature ----------------------"
-			p signature
-			p "------------ comparison string ---------------"
-			p comparison_string
-			p "-----------------------------------------------"
+			Rails.logger.info "Signature failed due to verify"
+			Rails.logger.info "-------------- Signature ---------------------"
+			Rails.logger.info headers['Signature']
+			Rails.logger.info "------------- header signature ---------------"
+			Rails.logger.info sig_header['signature']
+			Rails.logger.info "------------- signature ----------------------"
+			Rails.logger.info signature
+			Rails.logger.info "------------ comparison string ---------------"
+			Rails.logger.info comparison_string
+			Rails.logger.info "-----------------------------------------------"
 			return false;
 		end
 
