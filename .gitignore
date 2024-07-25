@@ -36,3 +36,4 @@
 
 notes.txt
 *.pem
+.env

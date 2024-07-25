@@ -12,7 +12,7 @@ class BoxController < ApplicationController
 				if body['object']['type'] == 'Follow'
 					# Unfollow
 					letter = body['object']['object']
-						.match(/https:\/\/#{ENV['url']}\/letters/(.)/)[1]
+						.match(/https:\/\/#{ENV['url']}\/letters\/(.)/)[1]
 					Follow.where(url_id: body['actor'], letter: letter).delete_all
 				end
 			end
@@ -25,4 +25,6 @@ class BoxController < ApplicationController
 
 	def out
 	end
+
+	private
 end
