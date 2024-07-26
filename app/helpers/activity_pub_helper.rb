@@ -10,13 +10,13 @@ module ActivityPubHelper
 	end
 
 	def http_signature_headers(uri, body, letter)
-		date = Time.now.utc.httpdate
-		keypair = OpenSSL::PKey::RSA.new(ENV['PRIVATE_KEY'])
 		host = uri.host
+		date = Time.now.utc.httpdate
 		target = uri.request_uri
 		digest = "SHA-256=#{Digest::SHA256.base64digest(body)}"
-
 		signed_string = "(request-target): post #{target}\nhost: #{host}\ndate: #{date}\ndigest: #{digest}"
+
+		keypair = OpenSSL::PKey::RSA.new(ENV['PRIVATE_KEY'])
 		signature = Base64.strict_encode64(
 			keypair.sign(OpenSSL::Digest::SHA256.new, signed_string)
 		)
@@ -24,8 +24,8 @@ module ActivityPubHelper
 		keyId = "keyId=\"#{full_url}/letters/#{letter}#main-key\""
 		headers = "headers=\"(request-target) host date digest\""
 		sig = "signature=\"#{signature}\""
-
 		sig_header = "#{keyId},#{headers},#{sig}"
+
 		{ Host: host, Date: date, Digest: digest, Signature: sig_header }
 	end
 

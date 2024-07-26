@@ -55,7 +55,7 @@ module Pub
 				published: @published,
 				publicKey: {
 					id: "#{full_url}/letters/#{@username}#main-key",
-					owner: "#{full_url}/letters/#{@username}#main-key",
+					owner: "#{full_url}/letters/#{@username}",
 					publicKeyPem: ENV['PUBLIC_KEY']
 				},
 				# icon: {
