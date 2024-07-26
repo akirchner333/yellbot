@@ -19,6 +19,12 @@ class Follow < ApplicationRecord
 		url.match(/letters\/(.)$/)[1]
 	end
 
+	def self.shared_inboxes
+		distinct
+			.pluck(:host)
+			.map {|host| URI.parse("https://#{host}/inbox") }
+	end
+
 	def inbox
 		URI.parse(url_id + "/inbox")
 	end
