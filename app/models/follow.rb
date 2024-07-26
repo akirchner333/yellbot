@@ -19,6 +19,7 @@ class Follow < ApplicationRecord
 		url.match(/letters\/(.)$/)[1]
 	end
 
+	# Not 100% that the assumption I'm making here is reliable
 	def self.shared_inboxes
 		distinct
 			.pluck(:host)

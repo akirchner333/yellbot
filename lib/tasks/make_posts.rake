@@ -5,4 +5,4 @@ namespace :make_posts do
 			Note.generate(letter)
 		end
 	end
-end
+end	
