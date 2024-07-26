@@ -8,8 +8,12 @@ class BoxController < ApplicationController
 			if body['type'] == "Follow"
 				follow = Follow.create_from_activity(body)
 				if follow.valid?
-					accept = Pub::Accept.new(follow, body)
-					activity_post(follow.inbox, accept.to_s, follow.letter)
+					action = Action.create(
+						activity_type: "Accept",
+						actor: "#{full_url}/letters/#{follow.letter}",
+						object: JSON.generate(body)
+					)
+					activity_post(follow.inbox, action.to_activity.to_s, follow.letter)
 				end
 			elsif body['type'] == "Undo"
 				if body['object']['type'] == 'Follow'

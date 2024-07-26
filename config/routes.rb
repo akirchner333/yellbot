@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
   post "/inbox", to: "box#in"
   get "/outbox", to: "box#out"
+
+  get "/actions/:id", to: "actions#show"
 end

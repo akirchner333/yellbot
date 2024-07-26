@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_25_183024) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_26_162251) do
+  create_table "actions", force: :cascade do |t|
+    t.integer "activity_type"
+    t.string "actor"
+    t.string "object"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "follows", force: :cascade do |t|
     t.string "letter"
     t.string "host"
