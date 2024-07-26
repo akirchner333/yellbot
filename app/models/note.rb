@@ -10,9 +10,13 @@ class Note < ApplicationRecord
 		create(letter: letter, content: Yell.yell(letter))
 	end
 
+	def to_activity
+		Pub::Note.from_model(self)
+	end
+
 	private
 	def send_to_pub
-		body = Pub::Note.from_model(self).to_s
+		body = to_activity.to_s
 		Follow.where(letter: letter).shared_inboxes.each do |inbox|
 			activity_post(inbox, body, letter)
 		end

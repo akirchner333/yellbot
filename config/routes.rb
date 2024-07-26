@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "letters/:id/featured", to: "letters#featured"
   get "letters/:id/followers", to: "letters#followers"
   get "letters/:id/following", to: "letters#following"
+  get "letters/:id/outbox", to: "letters#outbox"
 
   get "/.well-known/webfinger", to: "well_known#webfinger"
 
@@ -16,7 +17,6 @@ Rails.application.routes.draw do
   get "notes/:id", to: "notes#rand", constraints: {id: /./}
 
   post "/inbox", to: "box#in"
-  get "/outbox", to: "box#out"
 
   get "/actions/:id", to: "actions#show"
 end

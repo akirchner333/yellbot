@@ -31,8 +31,5 @@ class BoxController < ApplicationController
 		end
 	end
 
-	def out
-	end
-
 	private
 end

@@ -44,7 +44,7 @@ module Pub
 				following: "#{full_url}/letters/#{@username}/following",
 				# Do I need personal inboxes? Or is one big for everyone fine?
 				inbox: "#{full_url}/inbox",
-				outbox: "#{full_url}/outbox",
+				outbox: "#{full_url}/letters/#{@username}/outbox",
 				featured: "#{full_url}/letters/#{@username}/featured",
 				name: @name,
 				preferredUsername: @preferredUsername,
