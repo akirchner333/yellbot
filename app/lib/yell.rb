@@ -5,7 +5,7 @@ class Yell
 		when 0
 			exclamations(letter, r)
 		when 1
-			single(letter, r)
+			word(letter, r)
 		when 2
 			sentence(letter, r)
 		when 3
@@ -16,12 +16,12 @@ class Yell
 	def self.exclamations(letter, r)
 		output = []
 		(r.rand(5) + 1).times do |i|
-			output[i] = letter * r.rand(1..9) + punctuation
+			output[i] = letter * r.rand(1..12) + punctuation
 		end
 		output.join(" ")
 	end
 
-	def self.single(letter, r)
+	def self.word(letter, r)
 		letter * r.rand(1..100) + "!" * r.rand(5)
 	end
 
@@ -34,11 +34,11 @@ class Yell
 		output.join(" ") + punctuation
 	end
 
-	def self.punctuation
-		%w[! ? . ...].sample
-	end
-
 	def self.single(letter, r)
 		letter
+	end
+
+	def self.punctuation
+		%w[! ? !! !? ?! . ...].sample
 	end
 end
