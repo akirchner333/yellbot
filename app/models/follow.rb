@@ -20,6 +20,6 @@ class Follow < ApplicationRecord
 	end
 
 	def inbox
-		url_id + "/inbox"
+		URI.parse(url_id + "/inbox")
 	end
 end

@@ -1,4 +1,6 @@
 class BoxController < ApplicationController
+	include ActivityPubHelper
+
 	skip_before_action :verify_authenticity_token
 
 	def in
@@ -9,7 +11,7 @@ class BoxController < ApplicationController
 				follow = Follow.create_from_activity(body)
 				if follow.valid?
 					action = Action.create(
-						activity_type: "Accept",
+						activity_type: "accept",
 						actor: "#{full_url}/letters/#{follow.letter}",
 						object: JSON.generate(body)
 					)
