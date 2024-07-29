@@ -20,13 +20,14 @@ class BoxController < ApplicationController
 			elsif body['type'] == "Like"
 				Like.create_from_activity(body)
 			elsif body['type'] == "Create"
-				# Since I don't follow anyone, this should be replies only
-				# Generate a new post in reply to that one
+				Note.reply(body)
 			elsif body['type'] == "Undo"
 				if body['object']['type'] == 'Follow'
 					Follow
 						.find_by_activity(body['actor'], body['object']['object'])
 						.delete_all
+				elsif body['object']['type'] == 'Like'
+					# Find the like and delete it
 				end
 			end
 

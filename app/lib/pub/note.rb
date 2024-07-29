@@ -2,19 +2,13 @@ module Pub
 	class Note < BaseObject
 		Type = "Note"
 
-		def self.rand(letter)
-			new(Yell.yell(letter), letter, letter, DateTime.now)
-		end
-
-		def self.from_model(note)
-			new(note.content, note.letter, note.id, note.created_at)
-		end
-
-		def initialize(post, actor, note_id, published)
-			@words = post
-			@actor = actor
-			@note_id = note_id
-			@published = published
+		def initialize(note)
+			@words = note.content
+			@actor = note.letter
+			@note_id = note.id
+			@published = note.created_at
+			@reply_to = note.reply_note
+			@reply_actor = note.reply_actor
 		end
 
 		# TODO: Figure out the id for these posts
@@ -43,25 +37,38 @@ module Pub
 					"https://www.w3.org/ns/activitystreams#Public"
 				],
 				cc:[
-					"#{full_url}/letters/#{@actor}/collections/followers"
-				],
+					"#{full_url}/letters/#{@actor}/collections/followers",
+					@reply_actor
+				].compact,
 				sensitive: false,
 				localOnly: false,
-				content: content,
+				content: "<p>#{content}</p>",
 				contentMap: {
 					en: content
 				},
 				attachment: [],
-				tag: [],
-				# inReplyTo: @post.parent_id ? "#{full_url}/posts/#{@post.parent_id}.json" : nil,
-				inReplyTo: nil,
+				tag: tag,
+				inReplyTo: @reply_to,
 				# on Mastodon this links to a collection of replies. But see if direct links work
 				# replies: @post.replies.pluck(:id).map { |id| "#{full_url}/posts/#{id}.json" }
 				replies: nil,
 				#atomUri: "...",
-				inReplyToAtomUri: nil,
+				inReplyToAtomUri: @reply_to,
 				#conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
 			}
+		end
+
+		def tag
+			if @reply_actor.nil?
+				[]
+			else
+				uri = URI.parse(@reply_actor)
+				[{
+					type: "Mention",
+					href: @reply_actor,
+					name: "@#{@reply_actor.split("/").last}@#{uri.host}"
+				}]
+			end
 		end
 	end
 end
