@@ -40,9 +40,8 @@ class Note < ApplicationRecord
 			actor: "#{full_url}/letters/#{letter}",
 			object: to_activity.to_s,
 		)
-		body = Pub::Create.new(action, self).to_h
 		Follow.where(letter: letter).shared_inboxes.each do |inbox|
-			activity_post(inbox, body, letter)
+			activity_post(inbox, action.to_activity.to_h, letter)
 		end
 	end
 end
