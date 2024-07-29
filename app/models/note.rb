@@ -1,6 +1,8 @@
 include ActivityPubHelper
 
 class Note < ApplicationRecord
+	has_many :likes
+	
 	validates :letter, presence: true, length: { is: 1 }
 	validates :content, presence: true
 

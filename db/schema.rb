@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_26_162251) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_29_165445) do
   create_table "actions", force: :cascade do |t|
     t.integer "activity_type"
     t.string "actor"
@@ -26,6 +26,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_26_162251) do
     t.string "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.string "actor"
+    t.integer "note_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_likes_on_note_id"
   end
 
   create_table "notes", force: :cascade do |t|

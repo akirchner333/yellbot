@@ -18,8 +18,7 @@ class BoxController < ApplicationController
 					activity_post(follow.inbox, action.to_activity.to_s, follow.letter)
 				end
 			elsif body['type'] == "Like"
-				# Find the post in question, create a like object in the database
-				# Increment some counts, maybe
+				Like.create_from_activity(body)
 			elsif body['type'] == "Create"
 				# Since I don't follow anyone, this should be replies only
 				# Generate a new post in reply to that one

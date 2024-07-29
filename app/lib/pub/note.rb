@@ -20,7 +20,7 @@ module Pub
 		# TODO: Figure out the id for these posts
 		# They don't actually exist as posts in the database, not necessarily
 		def id
-			"#{full_url}/posts/#{@note_id}"
+			"#{full_url}/notes/#{@note_id}"
 		end
 
 		def content
@@ -37,7 +37,7 @@ module Pub
 				**super,
 				published: @published.iso8601,
 				summary: nil,
-				url: "#{full_url}/posts/#{@note_id}",
+				url: "#{full_url}/notes/#{@note_id}",
 				attributedTo:"#{full_url}/letters/#{@actor}",
 				to:[
 					"https://www.w3.org/ns/activitystreams#Public"
