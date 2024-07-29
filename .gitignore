@@ -35,5 +35,6 @@
 /config/master.key
 
 notes.txt
+/notes/
 *.pem
 .env
