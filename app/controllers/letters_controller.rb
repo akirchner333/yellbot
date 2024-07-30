@@ -5,7 +5,7 @@ class LettersController < ApplicationController
 
 		respond_to do |format|
 			format.html
-			format.any(:json, :activity, :linked_data) { render json: Pub::Application.new(@letter).to_h }
+			format.any(:json, :activity, :linked_data) { render json: Pub::Service.new(@letter).to_h }
 		end
 	end
 
