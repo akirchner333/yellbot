@@ -6,14 +6,14 @@ module ActivityPubHelper
 	def activity_post(uri, body, letter)
 		HTTP
 			.headers(http_signature_headers(uri, body, letter))
-			.post(uri, body: body)
+			.post(uri, body: body.to_s)
 	end
 
 	def http_signature_headers(uri, body, letter)
 		host = uri.host
 		date = Time.now.utc.httpdate
 		target = uri.request_uri
-		digest = "SHA-256=#{Digest::SHA256.base64digest(body)}"
+		digest = "SHA-256=#{Digest::SHA256.base64digest(body.to_s)}"
 		signed_string = "(request-target): post #{target}\nhost: #{host}\ndate: #{date}\ndigest: #{digest}"
 
 		keypair = OpenSSL::PKey::RSA.new(ENV['PRIVATE_KEY'])

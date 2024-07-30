@@ -8,7 +8,7 @@ class BoxController < ApplicationController
 			
 		if helpers.sig_check(request.headers)
 			if body['type'] == "Follow"
-				follow = Follow.create_from_activity(body, letter)
+				follow = Follow.create_from_activity(body)
 				if follow.valid?
 					action = Action.create(
 						activity_type: "accept",

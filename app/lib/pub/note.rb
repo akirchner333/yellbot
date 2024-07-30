@@ -37,12 +37,12 @@ module Pub
 					"https://www.w3.org/ns/activitystreams#Public"
 				],
 				cc:[
-					"#{full_url}/letters/#{@actor}/collections/followers",
+					"#{full_url}/letters/#{@actor}/followers",
 					@reply_actor
 				].compact,
 				sensitive: false,
 				localOnly: false,
-				content: "<p>#{content}</p>",
+				content: "#{content}",
 				contentMap: {
 					en: content
 				},
