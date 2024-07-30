@@ -11,8 +11,6 @@ module Pub
 			@reply_actor = note.reply_actor
 		end
 
-		# TODO: Figure out the id for these posts
-		# They don't actually exist as posts in the database, not necessarily
 		def id
 			"#{full_url}/notes/#{@note_id}"
 		end
