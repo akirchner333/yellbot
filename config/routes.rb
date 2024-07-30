@@ -6,13 +6,14 @@ Rails.application.routes.draw do
 
   root "static#home"
   get "letters/:id", to: "letters#show"
+  post "letters", to: "letters#search"
   get "letters/:id/featured", to: "letters#featured"
   get "letters/:id/followers", to: "letters#followers"
   get "letters/:id/following", to: "letters#following"
 
   get "/.well-known/webfinger", to: "well_known#webfinger"
 
-  get "notes/:id", to: "notes#show", constraints: {id: /\d*/}
+  # get "notes/:id", to: "notes#show", constraints: {id: /\d*/}
   get "notes/:id", to: "notes#rand", constraints: {id: /./}
 
   # post "/inbox", to: "box#in"

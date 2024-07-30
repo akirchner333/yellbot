@@ -87,7 +87,7 @@ module ActivityPubHelper
 	def build_comp_string(header_list, headers)
 		header_list.split(' ').map do |header_name|
 			if header_name == '(request-target)'
-				'(request-target): post /inbox'
+				"(request-target): post #{headers['PATH_INFO']}"
 			else
 				"#{header_name}: #{headers[header_name.capitalize]}"
 			end

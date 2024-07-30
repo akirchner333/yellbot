@@ -1,8 +1,22 @@
 <h1><%= @letter %></h1>
 
-<% 10.times do %>
-	<div>
-		<%= @letter %><br>
-		<%= yell(@letter) %>
-	</div><br>
+<div>
+	You can follow <%= @letter %> at @<%= @letter %>@<%= ENV['URL'] %>.
+</div>
+
+<% @notes.each do |note| %>
+	<div class="post">
+		<div class="post-header">
+			<div><%= link_to @letter, "/letters/#{@letter}" %></div>
+			<div><%= note.created_at %></div>
+		</div>
+		<%= note.content %>
+	</div>
+<% end %>
+
+<% (10 - @notes.count).times do %>
+	<div class="post">
+		<%= link_to @letter, "/letters/#{@letter}" %><br>
+		<%= Yell.yell(@letter) %>
+	</div>
 <% end %>

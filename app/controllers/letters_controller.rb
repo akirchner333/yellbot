@@ -1,11 +1,18 @@
 class LettersController < ApplicationController
 	def show
 		@letter = params[:id]
+		@notes = Note.where(letter: @letter).limit(10)
 
 		respond_to do |format|
 			format.html
 			format.any(:json, :activity, :linked_data) { render json: Pub::Application.new(@letter).to_h }
 		end
+	end
+
+	def search
+		letter = params[:query][0]
+
+		redirect_to "/letters/#{letter}"
 	end
 
 	def featured
