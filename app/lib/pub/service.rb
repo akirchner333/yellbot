@@ -40,6 +40,16 @@ module Pub
 		def to_h
 			{
 				**super,
+				"@context": [
+					"https://www.w3.org/ns/activitystreams",
+					"https://w3id.org/security/v1",
+					{
+						featured: {
+							"@id": "toot:featured",
+							"@type": "@id"
+						}
+					}
+				],
 				followers: "#{full_url}/letters/#{@username}/followers",
 				following: "#{full_url}/letters/#{@username}/following",
 				inbox: "#{full_url}/letters/#{@username}/inbox",
