@@ -32,9 +32,6 @@ class LettersController < ApplicationController
 	end
 
 	def followers
-		# Now, in this case there will actually be somebody following something
-		# So we actually have to, ya known, interact with the database
-
 		render :json => Pub::OrderedCollection.from_model(
 			"letters/#{params[:id]}/followers",
 			Follow.where(letter: params[:id]),

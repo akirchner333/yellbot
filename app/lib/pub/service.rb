@@ -1,5 +1,5 @@
 module Pub
-	class Application < SecureObject
+	class Service < SecureObject
 		Type = "Service"
 
 		def initialize(letter)

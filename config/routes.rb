@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/.well-known/webfinger", to: "well_known#webfinger"
 
   get "notes/:id", to: "notes#show", constraints: {id: /\d*/}
+  get "notes/:id/replies", to: "notes#replies"
   # get "notes/:id", to: "notes#rand", constraints: {id: /./}
 
   # post "/inbox", to: "box#in"

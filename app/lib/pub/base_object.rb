@@ -11,9 +11,9 @@ module Pub
 
 		def to_h
 			{
-				"@context": self.class::Context,
+				id: id,
 				type: self.class::Type,
-				id: id
+				"@context": self.class::Context
 			}
 		end
 

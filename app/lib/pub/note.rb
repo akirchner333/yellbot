@@ -27,8 +27,9 @@ module Pub
 		def to_h
 			{
 				**super,
-				published: @published.iso8601,
 				summary: nil,
+				inReplyTo: @reply_to,
+				published: @published.iso8601,
 				url: "#{full_url}/notes/#{@note_id}",
 				attributedTo:"#{full_url}/letters/#{@actor}",
 				to:[
@@ -39,6 +40,7 @@ module Pub
 					@reply_actor
 				].compact,
 				sensitive: false,
+				inReplyToAtomUri: @reply_to,
 				localOnly: false,
 				content: "#{content}",
 				contentMap: {
@@ -46,12 +48,19 @@ module Pub
 				},
 				attachment: [],
 				tag: tag,
-				inReplyTo: @reply_to,
-				# on Mastodon this links to a collection of replies. But see if direct links work
-				# replies: @post.replies.pluck(:id).map { |id| "#{full_url}/posts/#{id}.json" }
-				replies: nil,
+				# This is a placeholder and a lie -
+				# I'm not meaningfully tracking replies
+				replies: {
+					id:"#{id}/replies",
+					type:"Collection",
+					first:{
+						type:"CollectionPage",
+						next: "#{id}/replies?page=1",
+						partOf: "#{id}/replies",
+						items: []
+					}
+				}
 				#atomUri: "...",
-				inReplyToAtomUri: @reply_to,
 				#conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
 			}
 		end
