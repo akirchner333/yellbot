@@ -42,7 +42,7 @@ module Pub
 				sensitive: false,
 				inReplyToAtomUri: @reply_to,
 				localOnly: false,
-				content: "#{content}",
+				content: content,
 				contentMap: {
 					en: content
 				},

@@ -13,7 +13,7 @@ module Pub
 			{
 				id: id,
 				type: self.class::Type,
-				"@context": self.class::Context
+				"@context": [self.class::Context]
 			}
 		end
 
