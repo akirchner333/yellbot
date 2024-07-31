@@ -41,7 +41,8 @@ class Note < ApplicationRecord
 			object: to_activity.to_s,
 		)
 		Follow.where(letter: letter).shared_inboxes.each do |inbox|
-			activity_post(inbox, action.to_activity.to_h, letter)
+			response = activity_post(inbox, action.to_activity.to_h, letter)
+			Rails.log.info("#{response.status}: #{response.body.to_s}")
 		end
 	end
 end
