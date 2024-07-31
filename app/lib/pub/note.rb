@@ -40,7 +40,7 @@ module Pub
 					@reply_actor
 				].compact,
 				sensitive: false,
-				inReplyToAtomUri: @reply_to,
+				# inReplyToAtomUri: @reply_to,
 				localOnly: false,
 				content: content,
 				contentMap: {
@@ -48,18 +48,17 @@ module Pub
 				},
 				attachment: [],
 				tag: tag,
-				# This is a placeholder and a lie -
-				# I'm not meaningfully tracking replies
-				replies: {
-					id:"#{id}/replies",
-					type:"Collection",
-					first:{
-						type:"CollectionPage",
-						next: "#{id}/replies?page=1",
-						partOf: "#{id}/replies",
-						items: []
-					}
-				}
+				# replies: {
+				# 	id:"#{id}/replies",
+				# 	type:"Collection",
+				# 	first:{
+				# 		type:"CollectionPage",
+				# 		next: "#{id}/replies?page=1",
+				# 		partOf: "#{id}/replies",
+				# 		items: []
+				# 	}
+				# }
+				replies: nil
 				#atomUri: "...",
 				#conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
 			}
