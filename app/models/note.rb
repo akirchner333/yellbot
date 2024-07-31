@@ -17,9 +17,10 @@ class Note < ApplicationRecord
 
 		# Putting href in there is rather ugly, so I might better
 		# handle that on the Pub::Note side
+		actor = activity["actor"]
 		create(
 			letter: replying_to.letter,
-			content: "<a href=\"#{activity["actor"]}\">@#{actor.split("/").last}</a> #{Yell.yell(letter)}",
+			content: "<a href=\"#{actor}\">@#{actor.split("/").last}</a> #{Yell.yell(replying_to.letter)}",
 			reply_note: activity["object"]["id"],
 			reply_actor: activity["actor"]
 		)
