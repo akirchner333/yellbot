@@ -43,6 +43,9 @@ class Note < ApplicationRecord
 		)
 		Follow.where(letter: letter).shared_inboxes.each do |inbox|
 			response = activity_post(inbox, action.to_activity.to_h, letter)
+			Rails.logger.info("*" * 100)
+			Rails.logger.info("#{response.status}")
+			Rails.logger.info("#{response.body.to_s}")
 		end
 	end
 end

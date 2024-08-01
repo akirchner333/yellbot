@@ -18,7 +18,7 @@ module Pub
 			@username = letter
 			@preferredUsername = letter
 			@url = id
-			# @icon = 'lazar_icon.png'
+			@icon = 'shout.png'
 			@published = "1960-11-24T00:00:00Z"
 			@attachments = [
 				{
@@ -67,11 +67,11 @@ module Pub
 					owner: "#{full_url}/letters/#{@username}",
 					publicKeyPem: ENV['PUBLIC_KEY']
 				},
-				# icon: {
-				# 	type: "Image",
-				# 	mediaType: "image/png",
-				# 	url: "#{full_url}#{ActionController::Base.helpers.asset_path(@icon)}"
-				# },
+				icon: {
+					type: "Image",
+					mediaType: "image/png",
+					url: "#{full_url}#{ActionController::Base.helpers.asset_path(@icon)}"
+				},
 				attachment: @attachments,
 				# following: "",
 				# image: { //Put a header here

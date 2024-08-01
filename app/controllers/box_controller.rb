@@ -5,7 +5,7 @@ class BoxController < ApplicationController
 
 	def in
 		body = JSON.parse(request.raw_post)
-			
+		Rails.logger.info("inbox body #{body}")
 		if helpers.sig_check(request.headers)
 			if body['type'] == "Follow"
 				follow = Follow.create_from_activity(body)
