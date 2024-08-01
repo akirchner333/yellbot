@@ -48,8 +48,8 @@ module ActivityPubHelper
 			'Content-Type' => 'application/activity+json',
 			'Accept': 'application/activity+json'
 		).get(key_id)
-		if !actor_response.code.is_a?(Net::HTTPSuccess)
-			Rails.logger.info "Signature failed due to not getting the actor #{key_id}"
+		if actor_response.status < 200 || actor_response.status >= 300
+			Rails.logger.info "Signature failed #{actor_response.status} due to not getting the actor #{key_id}"
 			Rails.logger.info headers['Signature']
 			return false
 		end
