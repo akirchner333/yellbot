@@ -41,8 +41,8 @@ class Note < ApplicationRecord
 			actor: "#{full_url}/letters/#{letter}",
 			object: to_activity.to_s,
 		)
-		Follow.where(letter: letter).shared_inboxes.each do |inbox|
-			response = activity_post(inbox, action.to_activity.to_h, letter)
+		Follow.where(letter: letter).each do |follower|
+			response = activity_post(follower.inbox, action.to_activity.to_h, letter)
 			Rails.logger.info("*" * 100)
 			Rails.logger.info("#{response.status}")
 			Rails.logger.info("#{response.body.to_s}")
