@@ -18,7 +18,7 @@ module Pub
 			@username = letter
 			@preferredUsername = letter
 			@url = id
-			@icon = 'shout.png'
+			@icon = 'shouting.png'
 			@published = "1960-11-24T00:00:00Z"
 			@attachments = [
 				{

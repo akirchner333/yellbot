@@ -26,7 +26,14 @@ module ActivityPubHelper
 		sig = "signature=\"#{signature}\""
 		sig_header = "#{keyId},#{headers},#{sig}"
 
-		{ Host: host, Date: date, Digest: digest, Signature: sig_header }
+		{ 
+			Host: host,
+			Date: date,
+			Digest: digest,
+			Signature: sig_header,
+			'Content-Type' => 'application/activity+json',
+			'Accept': 'application/activity+json'
+		}
 	end
 
 	def sig_check(headers)

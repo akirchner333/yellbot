@@ -19,17 +19,27 @@ body {
 	background: lightpink;
 }
 
-/*div {
-	margin: 25px 0;
-}*/
+h1 {
+	text-align: center;
+	text-decoration: underline;
+}
 
 .post {
 	border: 1px solid black;
 	padding: 10px;
+	margin: 10px;
+	background: white;
 }
 
 .post-header {
 	display: flex;
 	justify-content: space-between;
 	margin: 0;
+}
+
+.text {
+	background: white;
+	margin: 50px;
+	padding: 50px;
+	font-size: 20px;
 }
