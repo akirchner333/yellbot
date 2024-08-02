@@ -42,7 +42,7 @@ class Note < ApplicationRecord
 			object: to_activity.to_s,
 		)
 		Follow.where(letter: letter).each do |follower|
-			response = activity_post(follower.inbox, action.to_activity.to_h, letter)
+			response = activity_post(follower.inbox, action.to_activity, letter)
 			Rails.logger.info("*" * 100)
 			Rails.logger.info("#{response.status}")
 			Rails.logger.info("#{response.body.to_s}")
