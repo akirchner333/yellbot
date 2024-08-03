@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_01_222339) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_03_211643) do
   create_table "actions", force: :cascade do |t|
     t.integer "activity_type"
     t.string "actor"
     t.string "object"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ban_hosts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ban_letters", force: :cascade do |t|
+    t.string "letter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
