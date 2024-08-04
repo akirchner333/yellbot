@@ -20,7 +20,14 @@ class BoxController < ApplicationController
 			elsif body['type'] == "Like"
 				Like.create_from_activity(body)
 			elsif body['type'] == "Create"
+				# Should this check if you're following?
+				# Or put a limit on how many replies?
+				# Wouldn't want it to get into a loop
 				Note.reply(body)
+			elsif body['type'] == "Move"
+				# Query the target to see if it has a correct alsoKnown 
+				# Update the follow object to match
+				# Delete if you're going to a bad place
 			elsif body['type'] == "Undo"
 				if body['object']['type'] == 'Follow'
 					Follow
