@@ -6,6 +6,7 @@ module Pub
 			super()
 
 			@letter = letter
+			@handle = LetterHandler.get_handle(letter)
 			# Here are fields which might one day be set programatically
 			# But for now are hardcoded (cause I only have one actor)
 			@summary = <<~HTML
@@ -15,8 +16,8 @@ module Pub
 			HTML
 			.gsub(/[\t\n]/, "")
 			@name = letter
-			@username = letter
-			@preferredUsername = letter
+			@username = @handle
+			@preferredUsername = @handle
 			@url = id
 			@icon = 'shouting.png'
 			@published = "1960-11-24T00:00:00Z"
@@ -34,7 +35,7 @@ module Pub
 		end
 
 		def id
-			"#{full_url}/letters/#{@letter}"
+			"#{full_url}/letters/#{@handle}"
 		end
 
 		def to_h

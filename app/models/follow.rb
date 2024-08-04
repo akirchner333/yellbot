@@ -27,7 +27,7 @@ class Follow < ApplicationRecord
 	end
 
 	def self.letter_from_url(url)
-		url.match(/letters\/(.)$/)[1]
+		LetterHandler.get_letter(url.match(/letters\/(.)$/)[1])
 	end
 
 	# Not 100% that the assumption I'm making here is reliable

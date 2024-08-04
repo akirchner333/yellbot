@@ -1,8 +1,12 @@
 class LettersController < ApplicationController
 	def show
-		@letter = params[:id]
-		@notes = Note.where(letter: @letter).limit(10)
+		@letter = get_letter
+		raise ActionController::RoutingError.new('Not Found') if @letter.nil?
 
+		@handle = LetterHandler.get_handle(@letter)
+		return redirect_to "/letters/#{@handle}" if @handle != params[:id]
+
+		@notes = Note.where(letter: @letter).limit(10)
 		respond_to do |format|
 			format.html
 			format.any(:json, :activity, :linked_data) { render json: Pub::Service.new(@letter).to_h }
@@ -10,13 +14,13 @@ class LettersController < ApplicationController
 	end
 
 	def search
-		letter = params[:query][0]
+		letter = LetterHandler.get_handle(params[:query][0])
 
 		redirect_to "/letters/#{letter}"
 	end
 
 	def featured
-		letter = params[:id]
+		letter = get_letter
 		if Note.where(letter: letter).count < 5
 			5.times do
 				Note.generate(letter)
@@ -47,5 +51,10 @@ class LettersController < ApplicationController
 			Pub::OrderedCollectionPage.new(0, id, params[:page].to_i, [])
 
 		render :json => collection
+	end
+
+	private
+	def get_letter
+		LetterHandler.get_letter(params[:id])
 	end
 end
