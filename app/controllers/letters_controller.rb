@@ -9,7 +9,7 @@ class LettersController < ApplicationController
 		@notes = Note.where(letter: @letter).limit(10)
 		respond_to do |format|
 			format.html
-			format.any(:json, :activity, :linked_data) { render json: Pub::Service.new(@letter).to_h }
+			format.any(:json, :activity, :linked_data) { render json: Pub::Service.new(@letter) }
 		end
 	end
 
@@ -28,7 +28,7 @@ class LettersController < ApplicationController
 		end
 
 		collection = Pub::OrderedCollection.new(
-			"letters/#{letter}/featured",
+			"letters/#{LetterHandler.get_handle(letter)}/featured",
 			Note.where(letter: letter).limit(5).order(created_at: :desc).map { |n| n.to_activity }
 		)
 

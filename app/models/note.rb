@@ -34,11 +34,15 @@ class Note < ApplicationRecord
 		Pub::Note.new(self)
 	end
 
+	def handle
+		LetterHandler.get_handle(letter)
+	end
+
 	private
 	def send_to_pub
 		action = Action.create(
 			activity_type: 'create_note',
-			actor: "#{full_url}/letters/#{letter}",
+			actor: "#{full_url}/letters/#{handle}",
 			object: to_activity.to_s,
 		)
 		Follow.where(letter: letter).each do |follower|

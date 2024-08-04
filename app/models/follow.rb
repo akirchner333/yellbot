@@ -1,5 +1,6 @@
 class Follow < ApplicationRecord
 	validates :letter, presence: true, length: { is: 1 }
+	validate :allowed_host
 
 	def self.create_from_activity(activity)
 		uri = URI.parse(activity["actor"])
@@ -29,15 +30,10 @@ class Follow < ApplicationRecord
 	def self.letter_from_url(url)
 		LetterHandler.get_letter(url.match(/letters\/(.)$/)[1])
 	end
-
-	# Not 100% that the assumption I'm making here is reliable
-	def self.shared_inboxes
-		distinct
-			.pluck(:host)
-			.map {|host| URI.parse("https://#{host}/inbox") }
-	end
-
-	def inbox
-		URI.parse(url_id + "/inbox")
+	
+	def allowed_host
+		if BanHost.exists?(name: host)
+			errors.add(:host, "is not allowed by this instance.")
+		end
 	end
 end

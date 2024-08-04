@@ -4,7 +4,7 @@ module Pub
 
 		def initialize(note)
 			@words = note.content
-			@actor = note.letter
+			@actor = LetterHandler.get_handle(note.letter)
 			@note_id = note.id
 			@published = note.created_at
 			@reply_to = note.reply_note

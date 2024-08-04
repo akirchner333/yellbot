@@ -21,4 +21,22 @@ RSpec.describe Follow, type: :model do
       end.to change { Follow.count }.by(1)
     end
   end
+
+  context 'allowed_host' do
+    it 'does not allow hosts on the ban list' do
+      create :ban_host, name: "example-host.com"
+
+      follow = Follow.new(
+        url_id: "https://example-host.com/actors/follow",
+        host: "example-host.com",
+        username: "follow",
+        letter: "t",
+        inbox: "https://example-host.com/actors/follow/inbox",
+        shared_inbox: "https://example-host.com/inbox"
+      )
+
+      expect(follow.valid?).to be_falsey
+      expect(follow.errors[:host][0]).to eql("is not allowed by this instance.")
+    end
+  end
 end
