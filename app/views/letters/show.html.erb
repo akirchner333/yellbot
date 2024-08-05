@@ -1,22 +1,14 @@
 <h1><%= @letter %></h1>
 
 <div>
-	Follow @<%= @handle %>@<%= ENV['URL'] %>.
+	Follow <strong>@<%= @handle %>@<%= ENV['URL'] %></strong><br>
+	Bot posts every two hours
 </div>
 
 <% @notes.each do |note| %>
-	<div class="post">
-		<div class="post-header">
-			<div><%= link_to @letter, "/letters/#{@letter}" %></div>
-			<div><%= note.created_at %></div>
-		</div>
-		<%= note.content %>
-	</div>
+	<%= render note %>
 <% end %>
 
 <% (10 - @notes.count).times do %>
-	<div class="post">
-		<%= link_to @letter, "/letters/#{@letter}" %><br>
-		<%= Yell.yell(@letter) %>
-	</div>
+	<%= render partial: "notes/rand_note", locals: {letter: @letter} %>
 <% end %>

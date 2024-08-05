@@ -15,13 +15,25 @@
  */
 
 body {
-	padding: 20px;
 	background: lightpink;
+	margin: 0;
 }
 
 h1 {
 	text-align: center;
 	text-decoration: underline;
+}
+
+header {
+	background: white;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	border-bottom: 1px solid black;
+}
+
+main {
+	padding: 20px;
 }
 
 .post {

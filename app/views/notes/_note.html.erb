@@ -1,0 +1,12 @@
+<div class="post">
+	<div class="post-header">
+		<div><%= link_to note.letter, "/letters/#{note.letter}" %></div>
+		<div><%= note.created_at.strftime("%H:%m %m/%d/%y") %></div>
+		<div>
+			☆ <% if note.likes.count > 0 %><%= note.likes.count %><% end %>
+		</div>
+	</div>
+	<div>
+		<%= note.content %>
+	</div>
+</div>
