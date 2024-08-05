@@ -9,6 +9,14 @@ module ActivityPubHelper
 			.post(uri, body: body.to_s)
 	end
 
+	def activity_get(url)
+		response = HTTP.headers(
+			'Content-Type' => 'application/activity+json',
+			'Accept': 'application/activity+json'
+		).get(url)
+		JSON.parse(response.to_s)
+	end
+
 	def http_signature_headers(uri, body, letter)
 		host = uri.host
 		date = Time.now.utc.httpdate

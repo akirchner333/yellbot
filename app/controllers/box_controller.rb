@@ -25,9 +25,7 @@ class BoxController < ApplicationController
 				# Wouldn't want it to get into a loop
 				Note.reply(body)
 			elsif body['type'] == "Move"
-				# Query the target to see if it has a correct alsoKnown 
-				# Update the follow object to match
-				# Delete if you're going to a bad place
+				Follow.move(body)
 			elsif body['type'] == "Undo"
 				if body['object']['type'] == 'Follow'
 					Follow
@@ -45,7 +43,7 @@ class BoxController < ApplicationController
 	end
 
 	def outbox
-		total = Note.where(letter: params[:id]).count
+		total = Note.where(letter: LetterHandler.get_letter(params[:id])).count
 		id = "letters/#{params[:id]}/outbox"
 
 		render :json => Pub::OrderedCollection.from_model(

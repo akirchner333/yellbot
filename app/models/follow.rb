@@ -1,10 +1,12 @@
+include ActivityPubHelper
+
 class Follow < ApplicationRecord
 	validates :letter, presence: true, length: { is: 1 }
 	validate :allowed_host
 
 	def self.create_from_activity(activity)
 		uri = URI.parse(activity["actor"])
-		actor = get_actor_from_url(activity["actor"])
+		actor = activity_get(activity["actor"])
 		find_or_create_by(
 			url_id: uri.to_s,
 			host: uri.host,
@@ -15,12 +17,10 @@ class Follow < ApplicationRecord
 		)
 	end
 
-	def self.get_actor_from_url(url)
-		response = HTTP.headers(
-			'Content-Type' => 'application/activity+json',
-			'Accept': 'application/activity+json'
-		).get(url)
-		JSON.parse(response.to_s)
+	def self.move(activity)
+		# Find the relevant follow
+		# Check the new (old?) account to see if it's transfer is in place
+		# If yes, update the relevant follow
 	end
 
 	def self.find_by_activity(actor, object)
