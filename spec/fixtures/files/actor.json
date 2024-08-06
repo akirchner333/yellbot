@@ -58,7 +58,7 @@
 			}
 		}
 	],
-	"id":"https://example.com/users/example",
+	"id":"https://example.com/users/example_actor",
 	"type":"Person",
 	"following":"https://example.com/users/example_actor/following",
 	"followers":"https://example.com/users/example_actor/followers",

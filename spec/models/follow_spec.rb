@@ -45,8 +45,38 @@ RSpec.describe Follow, type: :model do
     end
   end
 
-  context 'move' do
+  context 'Move' do
+    let(:activity) {{
+      "@context" => "https://www.w3.org/ns/activitystreams",
+      "id" => "https://prevexample.com/users/example_actor#moves/1",
+      "actor" => "https://prevexample.com/users/example_actor",
+      "type" => "Move",
+      "object" => "https://prevexample.com/users/example_actor",
+      "target" => "https://example.com/users/example_actor",
+      "to" => "https://prevexample.com/users/example_actor/followers"
+    }}
+
     it 'updates follows' do
+      follow = create :follow,
+        url_id: "https://prevexample.com/users/example_actor",
+        letter: "b"
+      follow_two = create :follow,
+        url_id: "https://prevexample.com/users/example_actor",
+        letter: "5" 
+
+      stub_request(:get, "https://example.com/users/example_actor").
+        to_return(body: file_fixture("actor.json").read)
+
+      Follow.move(activity)
+
+      expect(Follow.count).to be(2)
+      follow = Follow.find(follow.id)
+      expect(follow.letter).to eql("b")
+      expect(follow.url_id).to eql("https://example.com/users/example_actor")
+
+      follow_two = Follow.find(follow_two.id)
+      expect(follow_two.letter).to eql("5")
+      expect(follow_two.url_id).to eql("https://example.com/users/example_actor")
     end
   end
 end

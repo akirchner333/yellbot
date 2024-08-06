@@ -20,9 +20,6 @@ class BoxController < ApplicationController
 			elsif body['type'] == "Like"
 				Like.create_from_activity(body)
 			elsif body['type'] == "Create"
-				# Should this check if you're following?
-				# Or put a limit on how many replies?
-				# Wouldn't want it to get into a loop
 				Note.reply(body)
 			elsif body['type'] == "Move"
 				Follow.move(body)
@@ -32,7 +29,7 @@ class BoxController < ApplicationController
 						.find_by_activity(body['actor'], body['object']['object'])
 						.delete_all
 				elsif body['object']['type'] == 'Like'
-					# Find the like and delete it
+					Like.delete_from_activity(body)
 				end
 			end
 

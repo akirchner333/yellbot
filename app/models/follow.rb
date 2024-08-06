@@ -18,9 +18,19 @@ class Follow < ApplicationRecord
 	end
 
 	def self.move(activity)
-		# Find the relevant follow
-		# Check the new (old?) account to see if it's transfer is in place
-		# If yes, update the relevant follow
+		follow = where(url_id: activity["object"])
+
+		new_actor = activity_get(activity["target"])
+		if new_actor["alsoKnownAs"].include?(activity["object"])
+			uri = URI.parse(new_actor["id"])
+			follow.update_all(
+				url_id: uri.to_s,
+				host: uri.host,
+				username: uri.path.split("/").last,
+				inbox: new_actor["inbox"],
+				shared_inbox: new_actor.dig("endpoints", "sharedInbox")
+			)
+		end
 	end
 
 	def self.find_by_activity(actor, object)
