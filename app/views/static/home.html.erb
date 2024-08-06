@@ -9,12 +9,12 @@
 	"Q" - <%= link_to "@Q@#{ENV['URL']}", "letters/Q" %><br>
 	"🦀🦀🦀🦀🦀🦀🦀🦀🦀 🦀🦀🦀🦀?!" - <%= link_to "@1F980@#{ENV['URL']}", "letters/1F980" %><br>
 	"ƎƎ! Ǝ!! ƎƎƎƎ?!" - <%= link_to "@0018E@#{ENV['URL']}", "letters/0018E" %><br>
-	Plus 154,998 more!
+	Plus 154,993 more!
 </div>
 
 <div class="text">
 	<h2>Instructions</h2>
-	For letters (<%= link_to "@x@#{ENV['URL']}", "/letters/x" %> or <%= link_to "@G@#{ENV['URL']}", "/letters/G" %>), digits (<%= link_to "@7@#{ENV['URL']}", "/letters/7" %>), and _, you can follow the character directly. For any other character, you follow the unicode value: follow 🐺 at <%= link_to "@1F43A@#{ENV['URL']}", "/letters/1F43A" %> or ? at <%= link_to "@0003F@#{ENV['URL']}", "letters/0003F" %>. Unicode values are displayed in hex, five digits long, all uppercase. The bots can be followed on any ActivityPub compatible system.
+	For letters (i.e. <%= link_to "@x@#{ENV['URL']}", "/letters/x" %> or <%= link_to "@G@#{ENV['URL']}", "/letters/G" %>), digits (i.e. <%= link_to "@7@#{ENV['URL']}", "/letters/7" %>), and _ (<%= link_to "@_@#{ENV['URL']}", "/letters/_" %>), you can follow the character directly. For any other character, you follow the unicode value: follow 🐺 at <%= link_to "@1F43A@#{ENV['URL']}", "/letters/1F43A" %> or ? at <%= link_to "@0003F@#{ENV['URL']}", "letters/0003F" %>. Unicode values are displayed in hex, five digits long, all uppercase. The bots can be followed on any ActivityPub compatible system.
 	<br><br>
 	<%= form_with url: "/letters", method: :post do |form| %>
 		<%= form.label :query, "You can easily find the unicode values for character through the search function" %><br>
