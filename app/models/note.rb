@@ -46,7 +46,7 @@ class Note < ApplicationRecord
 			object: to_activity.to_s,
 		)
 		Follow.where(letter: letter).each do |follower|
-			response = activity_post(URI.parse(follower.inbox), action.to_activity, letter)
+			response = activity_post(follower.inbox, action.to_activity, letter)
 		end
 	end
 end

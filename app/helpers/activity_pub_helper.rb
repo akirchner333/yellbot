@@ -17,7 +17,8 @@ module ActivityPubHelper
 		JSON.parse(response.to_s)
 	end
 
-	def http_signature_headers(uri, body, letter)
+	def http_signature_headers(url, body, letter)
+		uri = URI.parse(url)
 		host = uri.host
 		date = Time.now.utc.httpdate
 		target = uri.request_uri
