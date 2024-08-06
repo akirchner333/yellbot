@@ -12,7 +12,7 @@ class BoxController < ApplicationController
 				if follow.valid?
 					action = Action.create(
 						activity_type: "accept",
-						actor: "#{full_url}/letters/#{follow.letter}",
+						actor: "#{full_url}/letters/#{follow.handle}",
 						object: JSON.generate(body)
 					)
 					activity_post(follow.inbox, action.to_activity.to_s, follow.letter)

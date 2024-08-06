@@ -46,4 +46,8 @@ class Follow < ApplicationRecord
 			errors.add(:host, "is not allowed by this instance.")
 		end
 	end
+
+	def handle
+		LetterHandler.get_handle(letter)
+	end
 end

@@ -14,9 +14,9 @@ class LettersController < ApplicationController
 	end
 
 	def search
-		letter = LetterHandler.get_handle(params[:query][0])
+		handle = LetterHandler.get_handle(params[:query][0])
 
-		redirect_to "/letters/#{letter}"
+		redirect_to "/letters/#{handle}"
 	end
 
 	def featured
