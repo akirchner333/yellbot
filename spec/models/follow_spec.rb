@@ -79,4 +79,14 @@ RSpec.describe Follow, type: :model do
       expect(follow_two.url_id).to eql("https://example.com/users/example_actor")
     end
   end
+
+  context 'letter_from_url' do
+    it 'handles basic letters' do
+      expect(Follow.letter_from_url("localhost:3000/letters/a")).to eql("a")
+    end
+
+    it 'handles unicode letters' do
+      expect(Follow.letter_from_url("localhost:3000/letters/00025")).to eql("%")
+    end
+  end
 end

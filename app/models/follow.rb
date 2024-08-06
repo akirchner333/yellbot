@@ -38,7 +38,7 @@ class Follow < ApplicationRecord
 	end
 
 	def self.letter_from_url(url)
-		LetterHandler.get_letter(url.match(/letters\/(.)$/)[1])
+		LetterHandler.get_letter(url.match(/letters\/(.*)$/)[1])
 	end
 	
 	def allowed_host

@@ -28,6 +28,10 @@ module Pub
 					value: "Two Hours"
 				},{
 					type: "PropertyValue",
+					name: "Address inquiries to",
+					value: "@an_alexa_k@instance.digital"
+				},{
+					type: "PropertyValue",
 					name: letter,
 					value: letter
 				}
