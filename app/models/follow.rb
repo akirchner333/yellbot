@@ -40,6 +40,10 @@ class Follow < ApplicationRecord
 	def self.letter_from_url(url)
 		LetterHandler.get_letter(url.match(/letters\/(.*)$/)[1])
 	end
+
+	def self.where_handle(handle)
+		where(letter: LetterHandler.get_letter(handle))
+	end
 	
 	def allowed_host
 		if BanHost.exists?(name: host)

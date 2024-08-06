@@ -38,7 +38,7 @@ class LettersController < ApplicationController
 	def followers
 		render :json => Pub::OrderedCollection.from_model(
 			"letters/#{params[:id]}/followers",
-			Follow.where(letter: params[:id]),
+			Follow.where_handle(params[:id]),
 			params,
 			:url_id
 		)
