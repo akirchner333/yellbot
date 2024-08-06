@@ -18,10 +18,21 @@ module Pub
 		def content
 			<<~HTML
 				<p>
-					#{@words}
+					#{at_link}#{@words}
 				</p>
 			HTML
 			.gsub(/[\t\n]/, "")
+		end
+
+		def at_link
+			return "" if @reply_actor.nil?
+			
+			"<a href=\"#{@reply_actor}\">@#{reply_name}</a> "
+		end
+
+		def reply_name
+			uri = URI.parse(@reply_actor)
+			"@#{@reply_actor.split("/").last}@#{uri.host}"
 		end
 
 		def to_h
@@ -68,11 +79,10 @@ module Pub
 			if @reply_actor.nil?
 				[]
 			else
-				uri = URI.parse(@reply_actor)
 				[{
 					type: "Mention",
 					href: @reply_actor,
-					name: "@#{@reply_actor.split("/").last}@#{uri.host}"
+					name: reply_name
 				}]
 			end
 		end

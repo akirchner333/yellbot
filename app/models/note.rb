@@ -15,12 +15,16 @@ class Note < ApplicationRecord
 	def self.reply(activity)
 		replying_to = Note.find_by_url(activity["object"]["inReplyTo"])
 
-		# Putting href in there is rather ugly, so I might better
-		# handle that on the Pub::Note side
+		return if BanHost.exists?(name: id_host(activity["actor"]))
+		
+		# Don't reply to the same person twice in the same 10 minute period
+		prev_reply = where(reply_actor: activity["actor"]).order(created_at: :desc).first
+		return if prev_reply && prev_reply.created_at > 10.minutes.ago
+
 		actor = activity["actor"]
 		create(
 			letter: replying_to.letter,
-			content: "<a href=\"#{actor}\">@#{actor.split("/").last}</a> #{Yell.yell(replying_to.letter)}",
+			content: Yell.yell(replying_to.letter),
 			reply_note: activity["object"]["id"],
 			reply_actor: activity["actor"]
 		)
@@ -46,7 +50,11 @@ class Note < ApplicationRecord
 			object: to_activity.to_s,
 		)
 		Follow.where(letter: letter).each do |follower|
-			response = activity_post(follower.inbox, action.to_activity, letter)
+			activity_post(follower.inbox, action.to_activity, letter)
+		end
+
+		if !reply_actor.nil?
+			activity_post("#{reply_actor}/inbox", action.to_activity, letter)
 		end
 	end
 end

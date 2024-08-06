@@ -1,0 +1,49 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams"
+  ],
+  "id": "https://example.com/users/actor/statuses/1/activity",
+  "type": "Create",
+  "actor": "https://example.com/users/actor",
+  "published": "2024-07-31T21:13:41Z",
+  "to": [
+    "https://www.w3.org/ns/activitystreams#Public"
+  ],
+  "cc": [
+    "https://example.com/users/actor/followers",
+    "https://localhost:300/letters/b"
+  ],
+  "object": {
+    "id": "https://example.com/users/actor/statuses/1",
+    "type": "Note",
+    "summary": null,
+    "inReplyTo": "https://localhost:3000/notes/1",
+    "published": "2024-07-31T21:13:41Z",
+    "url": "https://example.com/@actor/1",
+    "attributedTo": "https://example.com/users/actor",
+    "to": [
+      "https://www.w3.org/ns/activitystreams#Public"
+    ],
+    "cc": [
+      "https://example.com/users/actor/followers",
+      "https://localhost:300/letters/b"
+    ],
+    "sensitive": false,
+    "atomUri": "https://example.com/users/actor/statuses/1",
+    "inReplyToAtomUri": "https://localhost:3000/notes/#{note.id}",
+    "conversation": "tag:instance.digital,2024-07-30:objectId=146921:objectType=Conversation",
+    "content": "<p>hi :)</p>",
+    "contentMap": {
+      "en": "<p>hi :)</p>"
+    },
+    "attachment": [],
+    "tag": [],
+    "replies": {}
+  },
+  "signature": {
+    "type": "RsaSignature2017",
+    "creator": "https://example.com/users/actor#main-key",
+    "created": "2024-07-31T21:13:42Z",
+    "signatureValue": "signatureValue here"
+  }
+}

@@ -99,6 +99,10 @@ module ActivityPubHelper
 		return true
 	end
 
+	def id_host(url)
+		URI.parse(url).host
+	end
+
 	private
 
 	def build_comp_string(header_list, headers)
