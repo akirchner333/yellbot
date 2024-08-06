@@ -39,3 +39,4 @@ notes.txt
 /notes/
 *.pem
 .env*
+ban.txt
