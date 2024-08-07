@@ -36,16 +36,37 @@ RSpec.describe Note, type: :model do
   end
 
   context 'reply' do
-    it 'creates a reply' do
-      note = create :note, id: 1
+    before do
       stub_request(:post, "https://example.com/users/actor/inbox")
+    end
 
+    let!(:note) { create :note, id: 1 }
+
+    it 'creates a reply' do
       activity = JSON.parse(file_fixture("reply.json").read)
       expect {
         note = Note.reply(activity)
         expect(note.reply_note).to eql("https://example.com/users/actor/statuses/1")
         expect(note.reply_actor).to eql("https://example.com/users/actor")
       }.to change { Note.count }.by(1)
+    end
+
+    it 'does not reply to messages from banned hosts' do
+      create :ban_host, name: "example.com"
+
+      activity = JSON.parse(file_fixture("reply.json").read)
+      expect {
+        expect(Note.reply(activity)).to be_nil
+      }.not_to change { Note.count }
+    end
+
+    it 'does not reply if there was a recent reply' do
+      create :note, content: "blub", created_at: 20.minutes.ago, reply_actor: "https://example.com/users/actor"
+      create :note, content: "blub", created_at: 5.minutes.ago, reply_actor: "https://example.com/users/actor"
+      activity = JSON.parse(file_fixture("reply.json").read)
+      expect {
+        expect(Note.reply(activity)).to be_nil
+      }.not_to change { Note.count }
     end
   end
 end
