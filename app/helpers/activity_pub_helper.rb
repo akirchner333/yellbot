@@ -17,7 +17,7 @@ module ActivityPubHelper
 		JSON.parse(response.to_s)
 	end
 
-	def http_signature_headers(url, body, letter)
+	def http_signature_headers(url, body, handle)
 		uri = URI.parse(url)
 		host = uri.host
 		date = Time.now.utc.httpdate
@@ -30,7 +30,7 @@ module ActivityPubHelper
 			keypair.sign(OpenSSL::Digest::SHA256.new, signed_string)
 		)
 
-		keyId = "keyId=\"#{full_url}/letters/#{letter}#main-key\""
+		keyId = "keyId=\"#{full_url}/letters/#{handle}#main-key\""
 		headers = "headers=\"(request-target) host date digest\""
 		sig = "signature=\"#{signature}\""
 		sig_header = "#{keyId},#{headers},#{sig}"

@@ -27,7 +27,7 @@ module Pub
 		def at_link
 			return "" if @reply_actor.nil?
 			
-			"<a href=\"#{@reply_actor}\">@#{reply_name}</a> "
+			"<a href=\"#{@reply_actor}\">#{reply_name}</a> "
 		end
 
 		def reply_name

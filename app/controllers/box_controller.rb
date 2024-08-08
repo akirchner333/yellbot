@@ -15,7 +15,7 @@ class BoxController < ApplicationController
 						actor: "#{full_url}/letters/#{follow.handle}",
 						object: JSON.generate(body)
 					)
-					activity_post(follow.inbox, action.to_activity.to_s, follow.letter)
+					activity_post(follow.inbox, action.to_activity.to_s, follow.handle)
 				end
 			elsif body['type'] == "Like"
 				Like.create_from_activity(body)

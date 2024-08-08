@@ -88,4 +88,22 @@ RSpec.describe Follow, type: :model do
       expect(Follow.letter_from_url("localhost:3000/letters/00025")).to eql("%")
     end
   end
+
+  context "where_handle" do
+    it 'finds basic letters' do
+      follow = create :follow, letter: "a"
+
+      result = Follow.where_handle("a")
+      expect(result.count).to eql(1)
+      expect(result.first.id).to eql(follow.id)
+    end
+
+    it 'finds unicode' do
+      follow = create :follow, letter: "?"
+
+      result = Follow.where_handle("0003F")
+      expect(result.count).to eql(1)
+      expect(result.first.id).to eql(follow.id)
+    end
+  end
 end

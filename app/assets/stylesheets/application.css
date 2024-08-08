@@ -24,6 +24,12 @@ h1 {
 	text-decoration: underline;
 }
 
+.letter{
+	font-size: 150px;
+	margin: 10px;
+	text-decoration: none;
+}
+
 header {
 	background: white;
 	display: flex;
