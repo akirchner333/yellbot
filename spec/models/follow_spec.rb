@@ -10,7 +10,6 @@ RSpec.describe Follow, type: :model do
       "object" => "https://aaaa.rest/letters/5"
     }}
 
-    # Gotta ignore this until I set up some kind of http handling
     it 'creates a new follow' do
       stub_request(:get, "https://example.com/users/example_actor").
         to_return(body: file_fixture("actor.json").read)

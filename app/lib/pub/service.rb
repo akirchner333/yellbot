@@ -7,8 +7,6 @@ module Pub
 
 			@letter = letter
 			@handle = LetterHandler.get_handle(letter)
-			# Here are fields which might one day be set programatically
-			# But for now are hardcoded (cause I only have one actor)
 			@summary = <<~HTML
 			<p>
 				#{Yell.yell(letter)}
