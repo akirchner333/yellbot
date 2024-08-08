@@ -1,20 +1,21 @@
 <h1>Bots That Yell</h1>
 <div class="text">
-	<%= ENV['URL']%> is an ActivityPub server that provides a bots that yell. Any yell you want, we can provide.
+	<%= ENV['URL'].capitalize %> is an ActivityPub server that provides a bots that yell. Any yell you want, we can provide.
 </div>
 
 <div class="text">
-	"yyyyyyyyyy!? yyyyyyyyyyy... yy? yy... yyyyyyyyyy." - <%= link_to "@y@#{ENV['URL']}", "letters/y" %><br>
-	"22222222222222!!!!" - @2@<%= ENV['URL'] %><%= link_to "@2@#{ENV['URL']}", "letters/2" %><br>
-	"Q" - <%= link_to "@Q@#{ENV['URL']}", "letters/Q" %><br>
-	"🦀🦀🦀🦀🦀🦀🦀🦀🦀 🦀🦀🦀🦀?!" - <%= link_to "@1F980@#{ENV['URL']}", "letters/1F980" %><br>
-	"ƎƎ! Ǝ!! ƎƎƎƎ?!" - <%= link_to "@0018E@#{ENV['URL']}", "letters/0018E" %><br>
-	Plus 154,993 more!
+	"<%= Yell.yell("y") %>" - <%= link_to "@y@#{ENV['URL']}", "letters/y" %><br>
+	"<%= Yell.yell("2") %>" - <%= link_to "@2@#{ENV['URL']}", "letters/2" %><br>
+	"<%= Yell.yell("Q") %>" - <%= link_to "@Q@#{ENV['URL']}", "letters/Q" %><br>
+	"<%= Yell.yell("🦀") %>" - <%= link_to "@1F980@#{ENV['URL']}", "letters/1F980" %><br>
+	"<%= Yell.yell("Ǝ") %>" - <%= link_to "@0018E@#{ENV['URL']}", "letters/0018E"%><br>
+	"<%= Yell.yell("~") %>" - <%= link_to "@0007E@#{ENV['URL']}", "letters/0007E"%><br>
+	Plus 154,992 more!
 </div>
 
 <div class="text">
 	<h2>Instructions</h2>
-	For letters (i.e. <%= link_to "@x@#{ENV['URL']}", "/letters/x" %> or <%= link_to "@G@#{ENV['URL']}", "/letters/G" %>), digits (i.e. <%= link_to "@7@#{ENV['URL']}", "/letters/7" %>), and _ (<%= link_to "@_@#{ENV['URL']}", "/letters/_" %>), you can follow the character directly. For any other character, you follow the unicode value: follow 🐺 at <%= link_to "@1F43A@#{ENV['URL']}", "/letters/1F43A" %> or ? at <%= link_to "@0003F@#{ENV['URL']}", "letters/0003F" %>. Unicode values are displayed in hex, five digits long, all uppercase. The bots can be followed on any ActivityPub compatible system.
+	For letters (<%= link_to "@x@#{ENV['URL']}", "/letters/x" %> or <%= link_to "@G@#{ENV['URL']}", "/letters/G" %>), digits (<%= link_to "@7@#{ENV['URL']}", "/letters/7" %>), and _ (<%= link_to "@_@#{ENV['URL']}", "/letters/_" %>), you can follow the character directly. For any other character, you follow the unicode value: follow 🐺 at <%= link_to "@1F43A@#{ENV['URL']}", "/letters/1F43A" %> or ? at <%= link_to "@0003F@#{ENV['URL']}", "letters/0003F" %>. Unicode values are displayed in hex code, five digits long, all uppercase. The bots can be followed on Mastodon or any other ActivityPub compatible system.
 	<br><br>
 	<%= form_with url: "/letters", method: :post do |form| %>
 		<%= form.label :query, "You can easily find the unicode values for character through the search function" %><br>
@@ -24,5 +25,5 @@
 </div>
 
 <div class="text">
-	<%= ENV['URL'] %> was made by <a href="https://akirchner.website">Alexa Kirchner</a>.
+	<%= ENV['URL'].capitalize %> was made by <a href="https://akirchner.website">Alexa Kirchner</a>.
 </div>

@@ -16,13 +16,13 @@ class Yell
 	def self.exclamations(letter, r)
 		output = []
 		(r.rand(5) + 1).times do |i|
-			output[i] = letter * r.rand(1..12) + punctuation
+			output[i] = letter * r.rand(2..12) + punctuation
 		end
 		output.join(" ")
 	end
 
 	def self.word(letter, r)
-		letter * r.rand(1..100) + "!" * r.rand(5)
+		letter * r.rand(2..100) + "!" * r.rand(5)
 	end
 
 	def self.sentence(letter, r)
@@ -35,10 +35,10 @@ class Yell
 	end
 
 	def self.single(letter, r)
-		letter
+		"#{letter}#{punctuation}"
 	end
 
 	def self.punctuation
-		%w[! ? !! !? ?! . ...].sample
+		%W[! ? !! !? ?! . ... #{}].sample
 	end
 end

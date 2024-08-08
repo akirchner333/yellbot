@@ -55,6 +55,7 @@ main {
 	padding: 50px;
 	font-size: 20px;
 	box-shadow: 5px 5px #EEE;
+	word-wrap: break-word;
 }
 
 .text, .post {

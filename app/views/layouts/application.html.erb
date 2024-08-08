@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Scream</title>
+    <title><%= ENV['URL'].capitalize %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,7 +13,7 @@
   <body>
     <header>
       <div>
-        <%= link_to ENV['URL'], "/" %>
+        <%= link_to ENV['URL'].capitalize, "/" %>
       </div>
       <div>
         <%= form_with url: "/letters", method: :post do |form| %>
