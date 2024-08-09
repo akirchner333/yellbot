@@ -10,8 +10,8 @@ RSpec.describe LetterHandler do
     end
 
     it 'returns unicode characters when given a hex' do
-      expect(LetterHandler.get_letter("00023")).to eql("#")
-      expect(LetterHandler.get_letter("0003F")).to eql("?")
+      expect(LetterHandler.get_letter("23")).to eql("#")
+      expect(LetterHandler.get_letter("3F")).to eql("?")
       expect(LetterHandler.get_letter("1F628")).to eql("😨")
     end
 
@@ -21,9 +21,9 @@ RSpec.describe LetterHandler do
     end
 
     it 'returns nil for everything else' do
-      expect(LetterHandler.get_letter("aa")).to be_nil
+      expect(LetterHandler.get_letter("wolf")).to be_nil
       expect(LetterHandler.get_letter("%")).to be_nil
-      expect(LetterHandler.get_letter("23")).to be_nil
+      expect(LetterHandler.get_letter("110000")).to be_nil
     end
   end
 end

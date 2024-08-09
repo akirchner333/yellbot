@@ -16,6 +16,9 @@
         <%= link_to ENV['URL'].capitalize, "/" %>
       </div>
       <div>
+        <%= link_to "Random", "/random" %>
+      </div>
+      <div>
         <%= form_with url: "/letters", method: :post do |form| %>
           <%= form.text_field :query, size: 1, maxlength: 2 %>
           <%= form.submit "Search" %>

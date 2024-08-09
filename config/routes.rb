@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root "static#home"
   get "letters/:id", to: "letters#show"
   post "letters", to: "letters#search"
+  get "random", to: "letters#random"
   get "letters/:id/featured", to: "letters#featured"
   get "letters/:id/followers", to: "letters#followers"
   get "letters/:id/following", to: "letters#following"

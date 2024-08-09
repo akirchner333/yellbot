@@ -19,6 +19,12 @@ class LettersController < ApplicationController
 		redirect_to "/letters/#{handle}"
 	end
 
+	def random
+		handle = rand(5...12_255).to_s(16)
+		LetterHandler.get_letter(handle)
+		redirect_to "/letters/#{handle}"
+	end
+
 	def featured
 		letter = get_letter
 		if Note.where(letter: letter).count < 5

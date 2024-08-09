@@ -20,7 +20,7 @@ class LetterHandler
 	end
 
 	def self.char_to_hex(char)
-		char.ord.to_s(16).upcase.rjust(5, "0")
+		char.ord.to_s(16).upcase.rjust(2, "0")
 	end
 
 	def self.hex_to_char(hex)
@@ -28,6 +28,8 @@ class LetterHandler
 	end
 
 	def self.hex_code?(input)
-		/^[0-9A-F]{5}$/.match?(input)
+		return false if !/^[0-9A-Fa-f]{1,6}$/.match?(input)
+
+		input.to_i(16) < 1114112
 	end
 end
