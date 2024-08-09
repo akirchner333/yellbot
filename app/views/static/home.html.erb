@@ -15,11 +15,11 @@
 
 <div class="text">
 	<h2>Instructions</h2>
-	For letters (<%= link_to "@x@#{ENV['URL']}", "/letters/x" %> or <%= link_to "@G@#{ENV['URL']}", "/letters/G" %>), digits (<%= link_to "@7@#{ENV['URL']}", "/letters/7" %>), and _ (<%= link_to "@_@#{ENV['URL']}", "/letters/_" %>), you can follow the character directly. For any other character, you follow the unicode value: follow 🐺 at <%= link_to "@1F43A@#{ENV['URL']}", "/letters/1F43A" %> or ? at <%= link_to "@0003F@#{ENV['URL']}", "letters/0003F" %>. Unicode values are displayed in hex code, five digits long, all uppercase. The bots can be followed on Mastodon or any other ActivityPub compatible system.
+	For letters (<%= link_to "@x@#{ENV['URL']}", "/letters/x" %> or <%= link_to "@G@#{ENV['URL']}", "/letters/G" %>), digits (<%= link_to "@7@#{ENV['URL']}", "/letters/7" %>), and _ (<%= link_to "@_@#{ENV['URL']}", "/letters/_" %>), you can follow the character directly. For any other character, you follow the unicode value: follow "🐺" at <%= link_to "@1F43A@#{ENV['URL']}", "/letters/1F43A" %> or "?" at <%= link_to "@0003F@#{ENV['URL']}", "letters/0003F" %>. Unicode values are displayed in hex code, five digits long, all uppercase. The bots can be followed on Mastodon or any other ActivityPub compatible system.
 	<br><br>
 	<%= form_with url: "/letters", method: :post do |form| %>
-		<%= form.label :query, "You can easily find the unicode values for character through the search function" %><br>
-		<%= form.text_field :query, size: 1, maxlength: 2 %>
+		<%= form.label :query_body, "You can easily find the unicode values for character through the search function" %><br>
+		<%= form.text_field :query, id: "query_body", size: 1, maxlength: 2 %>
 		<%= form.submit "Search" %>
 	<% end %>
 </div>

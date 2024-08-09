@@ -53,7 +53,7 @@ class Note < ApplicationRecord
 			activity_post(follower.inbox, action.to_activity, letter)
 		end
 
-		if !reply_actor.nil?
+		if !reply_actor.nil? && !Follow.exists(letter: letter, url_id: reply_actor)
 			activity_post("#{reply_actor}/inbox", action.to_activity, letter)
 		end
 	end

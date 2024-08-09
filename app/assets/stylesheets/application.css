@@ -39,7 +39,7 @@ header {
 }
 
 main {
-	padding: 20px;
+	padding: 20px 2vw;
 }
 
 .post {
@@ -47,6 +47,7 @@ main {
 	padding: 10px;
 	margin: 10px;
 	background: white;
+	word-wrap: break-word;
 }
 
 .post-header {
@@ -57,8 +58,8 @@ main {
 
 .text {
 	background: white;
-	margin: 50px;
-	padding: 50px;
+	margin: 50px 5vw;
+	padding: 50px 4vw;
 	font-size: 20px;
 	box-shadow: 5px 5px #EEE;
 	word-wrap: break-word;
