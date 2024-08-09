@@ -50,7 +50,7 @@ class Note < ApplicationRecord
 			object: to_activity.to_s,
 		)
 		Follow.where(letter: letter).each do |follower|
-			activity_post(follower.inbox, action.to_activity, letter)
+			activity_post(follower.inbox, action.to_activity, handle)
 		end
 
 		if !reply_actor.nil? && !Follow.exists(letter: letter, url_id: reply_actor)

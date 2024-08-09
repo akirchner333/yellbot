@@ -3,9 +3,9 @@ module ActivityPubHelper
 		"https://#{ENV['URL']}"
 	end
 
-	def activity_post(uri, body, letter)
+	def activity_post(uri, body, handle)
 		HTTP
-			.headers(http_signature_headers(uri, body, letter))
+			.headers(http_signature_headers(uri, body, handle))
 			.post(uri, body: body.to_s)
 	end
 
