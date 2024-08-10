@@ -13,6 +13,7 @@ class Note < ApplicationRecord
 	end
 
 	def self.reply(activity)
+		return if activity["object"]["inReplyTo"].nil?
 		replying_to = Note.find_by_url(activity["object"]["inReplyTo"])
 
 		return if BanHost.exists?(name: id_host(activity["actor"]))

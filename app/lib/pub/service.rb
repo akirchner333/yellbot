@@ -76,7 +76,6 @@ module Pub
 					url: "#{full_url}#{ActionController::Base.helpers.asset_path(@icon)}"
 				},
 				attachment: @attachments,
-				# following: "",
 				# image: { //Put a header here
 				# 	type: "Image",
 				# 	mediaType: "image/png",

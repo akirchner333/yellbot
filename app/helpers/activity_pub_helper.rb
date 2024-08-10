@@ -46,10 +46,7 @@ module ActivityPubHelper
 	end
 
 	def sig_check(headers)
-		if !headers['Signature']
-			Rails.logger.info "Signature failed due to lack of signature header"
-			return false
-		end
+		return false if !headers['Signature']
 
 		sig_header = headers['Signature'].split(',').map do |pair|
 			parts = pair.match(/(.*)=\"(.*)\"/)
@@ -75,27 +72,15 @@ module ActivityPubHelper
 
 		comparison_string = build_comp_string(header_list, headers)
 
-		if !key.verify(OpenSSL::Digest::SHA256.new, signature, comparison_string) 
-			Rails.logger.info "Signature failed due to verify"
-			Rails.logger.info "-------------- Signature ---------------------"
-			Rails.logger.info headers['Signature']
-			Rails.logger.info "------------- header signature ---------------"
-			Rails.logger.info sig_header['signature']
-			Rails.logger.info "------------- signature ----------------------"
-			Rails.logger.info signature
-			Rails.logger.info "------------ comparison string ---------------"
-			Rails.logger.info comparison_string
-			Rails.logger.info "-----------------------------------------------"
+		if !key.verify(OpenSSL::Digest::SHA256.new, signature, comparison_string)
 			return false;
 		end
 
 		date = DateTime.parse(headers['Date'])
 		if date < 12.hours.ago
-			p "Signature failed due to the date"
 			return false
 		end
 
-		p "Signature passed!"
 		return true
 	end
 

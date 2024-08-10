@@ -51,7 +51,6 @@ module Pub
 					@reply_actor
 				].compact,
 				sensitive: false,
-				# inReplyToAtomUri: @reply_to,
 				localOnly: false,
 				content: content,
 				contentMap: {
@@ -70,8 +69,6 @@ module Pub
 				# 	}
 				# }
 				replies: nil
-				#atomUri: "...",
-				#conversation: "tag:#{ENV['url']},#{post.created_at}:objectId=#{post.id}:objectType=Conversation",
 			}
 		end
 

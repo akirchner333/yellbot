@@ -21,13 +21,7 @@ module Pub
 					"https://www.w3.org/ns/activitystreams#Public"
 				],
 				cc: @object["cc"],
-				object: @object,
-				# https://docs.joinmastodon.org/spec/security/#ld
-				# signature: {
-				# 	type: "RSASignature2017",
-				# 	creator: "#{@object["attributedTo"]}#main-key",
-				# 	signatureValue: "???"
-				# }
+				object: @object
 			}
 		end
 	end
