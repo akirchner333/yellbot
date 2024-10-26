@@ -12,7 +12,16 @@ Rails.application.routes.draw do
   get "letters/:id/followers", to: "letters#followers"
   get "letters/:id/following", to: "letters#following"
 
-  get "/.well-known/webfinger", to: "well_known#webfinger"
+  scope "/.well-known" do
+    get "/webfinger", to: "well_known#webfinger"
+    get "/nodeinfo", to: "well_known#nodeinfo"
+    get "/host-meta", to: "well_known#hostmeta"
+  end
+
+  scope "/nodeinfo" do
+    get "/2.0", to: "node_info#twozero"
+    get "/2.1", to: "node_info#twoone"
+  end
 
   get "notes/:id", to: "notes#show", constraints: {id: /\d*/}
   get "notes/:id/replies", to: "notes#replies"

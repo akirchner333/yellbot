@@ -24,4 +24,27 @@ class WellKnownController < ApplicationController
 
 		render plain: '', status: 400
 	end
+
+	def nodeinfo
+		render :json => {links: [
+			{
+				rel: "http://nodeinfo.diaspora.software/ns/schema/2.1",
+				href: "#{full_url}/nodeinfo/2.1"
+			},
+			{
+				rel: "http://nodeinfo.diaspora.software/ns/schema/2.0",
+				href: "#{full_url}/nodeinfo/2.0"
+			}
+		]}
+	end
+
+	def hostmeta
+		xml = <<~XML
+		<XRD>
+			<Link rel="lrdd" template="#{full_url}/.well-known/webfinger?resource={uri}" />
+		</XRD>
+		XML
+
+		render content_type: "application/xrd+xml", xml: xml
+	end
 end
